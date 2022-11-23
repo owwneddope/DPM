@@ -15,16 +15,16 @@ def main():
         return render_template('main.html')
 
     if flask.request.method == 'POST':
-        #loaded_model = pickle.load(open('gradient_МПТ 6.4 580.pkl','rb'))
+        path_models = 'models/'
         try:
-            loaded_model = pickle.load(open('regr_'+ flask.request.form['ser']
-        + '_' + flask.request.form['sec'] + '.pkl','rb'))
+            loaded_model = pickle.load(open(path_models + 'regr_'+ flask.request.form['ser']
+                                            + '_' + flask.request.form['sec'] + '.pkl','rb'))
             probeg_km = float(flask.request.form["probeg_km"])
             XX = float(flask.request.form["XX"])
             TP = float(flask.request.form["TP"])
             PP = float(flask.request.form["PP"])
             y_pred = loaded_model.predict([[probeg_km,XX,TP,PP]])
-            return render_template('main.html', result = y_pred)
+            return render_template('main.html', result = f'{y_pred} кг')
         except FileNotFoundError:
             return render_template('main.html', result = 'Введены некорректные значения серии или номера')
             
