@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<style>
+form { margin: auto; 
+    width: 50%}   
+.result {
+    margin: auto;
+    width: 35%;
+    border: 1px solid #ccc;
+}
+</style>
+
+<head>
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/style.css')}}">
+    <title>SPS_model</title>
+</head>
+<body>
+    <h1>Прогнозирование расхода топлива по ССПС:</h1>
+ </body>
+
+<form acion="{{url_for('main')}}" method = "POST">
+    <fieldset>
+        <legend>Введите серию, номер ССПС и значения показателей счетчиков:</legend>
+        <br>
+        Серия ССПС:
+        <input name = "ser" type = "text"
+        required>
+        <br>
+        <br>
+        Номер ССПС:
+        <input name = "sec" type = "text"
+        required>
+        <br>
+        <br>
+        Количество километров
+        <input name = "probeg_km" type = "number" step="0.01"
+        required>
+        <br>
+        <br>
+        Количество моточасов в режиме ("Рабочий режим")
+        <input name = "PP" type = "number" step="0.01"
+        required>
+        <br>
+        <br>
+        Количество моточасов в режиме ("Холостой ход")
+        <input name = "XX" type = "number" step="0.01"
+        required>
+        <br>
+        <br>
+        Количество моточасов в режиме ("Транспортировка")
+        <input name = "TP" type = "number" step="0.01"
+        required>
+        <br>
+        <br>
+        <input type="submit">
+    </fieldset>
+</form>
+
+<div class="result" align="center">
+    {% if result %}
+    <br>
+    <p style="font-size:20px">
+    Прогнозное (нормальное) значение топлива при указанных параметрах:
+    </p>
+    <p style="font-size:20px">{{result}}</p>
+    {% endif %} 
+</div>
