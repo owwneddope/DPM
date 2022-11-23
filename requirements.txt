@@ -2,4 +2,4 @@ Flask
 keras
 pickle-mixin
 gunicorn
-
+scikit-learn
